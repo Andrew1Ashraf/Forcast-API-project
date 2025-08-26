@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Scheherazade+New:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans+Arabic:wght@100..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+.playpen-sans-arabic-Header {
+  font-family: "Playpen Sans Arabic", cursive;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.scheherazade-new-regular {
+  font-family: "Scheherazade New", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.scheherazade-new-medium {
+  font-family: "Scheherazade New", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.scheherazade-new-semibold {
+  font-family: "Scheherazade New", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.scheherazade-new-bold {
+  font-family: "Scheherazade New", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.MuiTypography-root {
+  font-family: "Playpen Sans Arabic", cursive !important;
+  font-optical-sizing: auto !important;
+  font-style: normal !important;
+  line-height: 1.35 !important;
+}
+
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0052d0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus {
+  outline: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
