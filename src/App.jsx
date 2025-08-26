@@ -35,18 +35,14 @@ function App() {
 
     axios
       .get(
-        "https://api.openweathermap.org/data/2.5/weather?lat=30&lon=31.54903&appid=8d855b07a92a7b3b86f3b34c48297d05"
+        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/cairo/2025-08-27?unitGroup=metric&elements=tempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity&key=FNTBC938EMGQAZC3Y3TZH26RU&contentType=json"
       )
       .then(function (response) {
-        const responseTemp = Math.round(response.data.main.temp - 273.15);
-        const responseFeelsLike = Math.round(
-          response.data.main.feels_like - 273.15
-        );
-        const responseHumidity = response.data.main.humidity;
-        const responseMinTemp = Math.round(
-          response.data.main.temp_min - 273.15
-        );
-        const responseMaxTemp = Math.ceil(response.data.main.temp_max - 273.15);
+        const responseTemp = response.data.currentConditions.temp;
+        const responseFeelsLike = response.data.currentConditions.feelslike;
+        const responseHumidity = response.data.currentConditions.humidity;
+        const responseMinTemp = response.data.days[0].tempmin;
+        const responseMaxTemp = response.data.days[0].tempmax;
 
         setTemp({
           tempruture: responseTemp,
