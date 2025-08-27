@@ -1,3 +1,199 @@
+const capitals = [
+  "Abu dhabi",
+  "Abuja",
+  "Accra",
+  "Addis ababa",
+  "Algiers",
+  "Amman",
+  "Amsterdam",
+  "Andorra la vella",
+  "Ankara",
+  "Antananarivo",
+  "Apia",
+  "Ashgabat",
+  "Asmara",
+  "Asuncion",
+  "Athens",
+  "Baghdad",
+  "Baku",
+  "Bamako",
+  "Bandar seri begawan",
+  "Bangkok",
+  "Bangui",
+  "Banjul",
+  "Basseterre",
+  "Beijing",
+  "Beirut",
+  "Belgrade",
+  "Belmopan",
+  "Berlin",
+  "Bern",
+  "Bishkek",
+  "Bissau",
+  "Bogota",
+  "Brasilia",
+  "Bratislava",
+  "Brazzaville",
+  "Bridgetown",
+  "Brussels",
+  "Bucharest",
+  "Budapest",
+  "Buenos aires",
+  "Bujumbura",
+  "Cairo",
+  "Canberra",
+  "Caracas",
+  "Castries",
+  "Chisinau",
+  "Colombo",
+  "Conakry",
+  "Copenhagen",
+  "Damascus",
+  "Dakar",
+  "Dhaka",
+  "Dili",
+  "Djibouti",
+  "Dodoma",
+  "Doha",
+  "Dublin",
+  "Dushanbe",
+  "Freetown",
+  "Funafuti",
+  "Gaborone",
+  "Georgetown",
+  "Guatemala city",
+  "Hanoi",
+  "Harare",
+  "Havana",
+  "Helsinki",
+  "Honiara",
+  "Islamabad",
+  "Jakarta",
+  "Jerusalem",
+  "Juba",
+  "Kabul",
+  "Kampala",
+  "Kathmandu",
+  "Khartoum",
+  "Kigali",
+  "Kingston",
+  "Kingstown",
+  "Kinshasa",
+  "Kuala lumpur",
+  "Kuwait city",
+  "Kyiv",
+  "La paz",
+  "Libreville",
+  "Lilongwe",
+  "Lima",
+  "Lisbon",
+  "Ljubljana",
+  "Lome",
+  "London",
+  "Luanda",
+  "Lusaka",
+  "Luxembourg",
+  "Madrid",
+  "Majuro",
+  "Malabo",
+  "Male",
+  "Managua",
+  "Manama",
+  "Manila",
+  "Maputo",
+  "Maseru",
+  "Mbabane",
+  "Melekeok",
+  "Mexico city",
+  "Minsk",
+  "Mogadishu",
+  "Monaco",
+  "Monrovia",
+  "Montevideo",
+  "Moroni",
+  "Moscow",
+  "Muscat",
+  "Nairobi",
+  "Nassau",
+  "Naypyidaw",
+  "Ndjamena",
+  "New delhi",
+  "Nicosia",
+  "Niamey",
+  "Nuku'alofa",
+  "Nouakchott",
+  "Oslo",
+  "Ottawa",
+  "Ouagadougou",
+  "Palikir",
+  "Panama city",
+  "Paramaribo",
+  "Paris",
+  "Phnom penh",
+  "Podgorica",
+  "Port louis",
+  "Port moresby",
+  "Port of spain",
+  "Port vila",
+  "Port-au-prince",
+  "Porto-novo",
+  "Praia",
+  "Pretoria",
+  "Pristina",
+  "Pyongyang",
+  "Quito",
+  "Rabat",
+  "Reykjavik",
+  "Riga",
+  "Riyadh",
+  "Rome",
+  "Roseau",
+  "Saint george's",
+  "Saint john's",
+  "San jose",
+  "San marino",
+  "San salvador",
+  "Sanaa",
+  "Santiago",
+  "Santo domingo",
+  "Sao tome",
+  "Sarajevo",
+  "Seoul",
+  "Singapore",
+  "Skopje",
+  "Sofia",
+  "Sri jayawardenepura kotte",
+  "Stockholm",
+  "Suva",
+  "Taipei",
+  "Tallinn",
+  "Tarawa",
+  "Tashkent",
+  "Tbilisi",
+  "Tegucigalpa",
+  "Tehran",
+  "Thimphu",
+  "Tirana",
+  "Tokyo",
+  "Tripoli",
+  "Tunis",
+  "Ulan bator",
+  "Vaduz",
+  "Valletta",
+  "Vatican city",
+  "Victoria",
+  "Vienna",
+  "Vientiane",
+  "Vilnius",
+  "Warsaw",
+  "Washington",
+  "Wellington",
+  "Windhoek",
+  "Yaounde",
+  "Yaren",
+  "Yerevan",
+  "Zagreb",
+];
 import { Typography } from "@mui/material";
 import "./App.css";
 import "./Style.css";
@@ -13,6 +209,8 @@ function App() {
   const { t, i18n } = useTranslation();
   const [Language, setLanguage] = useState("en");
   const [date, setDate] = useState("");
+  const [city, setCity] = useState("Cairo"); // المدينة المختارة
+  const [dropdownOpen, setDropdownOpen] = useState(false); // فتح/قفل القائمة
   const [temp, setTemp] = useState({
     tempruture: null,
     feelsLike: null,
@@ -35,7 +233,7 @@ function App() {
 
     axios
       .get(
-        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/cairo/2025-08-27?unitGroup=metric&elements=tempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity&key=FNTBC938EMGQAZC3Y3TZH26RU&contentType=json"
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/2025-08-27?unitGroup=metric&elements=tempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity&key=FNTBC938EMGQAZC3Y3TZH26RU&contentType=json`
       )
       .then(function (response) {
         const responseTemp = response.data.currentConditions.temp;
@@ -55,7 +253,7 @@ function App() {
       .catch(function (error) {
         console.log(error);
       });
-  }, [Language]);
+  }, [Language, city]);
 
   function changeLanguage() {
     if (Language === "en") {
@@ -74,7 +272,7 @@ function App() {
           <div className="Header">
             <Typography variant="h6">{date}</Typography>
             <Typography style={{ cursor: "pointer" }} variant="h2">
-              {t("Cairo")}
+              {t(city)}
             </Typography>
           </div>
           <hr />
@@ -137,19 +335,62 @@ function App() {
             </div>
           </div>
         </div>
-        <button
-          onClick={changeLanguage}
-          style={{
-            marginTop: "10px",
-            display: "block",
-            marginRight: "100px",
-            backgroundColor: "transparent",
-          }}
-        >
-          <Typography variant="button">
-            {Language === "en" ? "Change Language" : "تغيير اللغة"}
-          </Typography>
-        </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button
+            onClick={changeLanguage}
+            style={{
+              marginTop: "10px",
+
+              backgroundColor: "#00ff6f96",
+            }}
+          >
+            <Typography variant="button">
+              {Language === "en" ? "Change Language" : "تغيير اللغة"}
+            </Typography>
+          </button>
+
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            style={{
+              marginTop: "10px",
+              backgroundColor: "#00ff6f96",
+            }}
+          >
+            <Typography variant="button">
+              {Language === "en" ? "Change City" : "تغيير المدينة"}
+            </Typography>
+          </button>
+          {dropdownOpen && (
+            <ul
+              style={{
+                borderRadius: "6px",
+                marginTop: "5px",
+                maxHeight: "200px",
+                overflowY: "auto",
+                listStyle: "none",
+                padding: "0px",
+                width: "200px",
+              }}
+            >
+              {capitals.map((c) => (
+                <li
+                  key={c}
+                  onClick={() => {
+                    setCity(c);
+                    setDropdownOpen(false);
+                  }}
+                  style={{
+                    padding: "8px",
+                    cursor: "pointer",
+                    borderBottom: "1px solid #2200ff92",
+                  }}
+                >
+                  {c}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </Container>
     </>
   );
