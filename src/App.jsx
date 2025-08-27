@@ -1,199 +1,4 @@
-const capitals = [
-  "Abu dhabi",
-  "Abuja",
-  "Accra",
-  "Addis ababa",
-  "Algiers",
-  "Amman",
-  "Amsterdam",
-  "Andorra la vella",
-  "Ankara",
-  "Antananarivo",
-  "Apia",
-  "Ashgabat",
-  "Asmara",
-  "Asuncion",
-  "Athens",
-  "Baghdad",
-  "Baku",
-  "Bamako",
-  "Bandar seri begawan",
-  "Bangkok",
-  "Bangui",
-  "Banjul",
-  "Basseterre",
-  "Beijing",
-  "Beirut",
-  "Belgrade",
-  "Belmopan",
-  "Berlin",
-  "Bern",
-  "Bishkek",
-  "Bissau",
-  "Bogota",
-  "Brasilia",
-  "Bratislava",
-  "Brazzaville",
-  "Bridgetown",
-  "Brussels",
-  "Bucharest",
-  "Budapest",
-  "Buenos aires",
-  "Bujumbura",
-  "Cairo",
-  "Canberra",
-  "Caracas",
-  "Castries",
-  "Chisinau",
-  "Colombo",
-  "Conakry",
-  "Copenhagen",
-  "Damascus",
-  "Dakar",
-  "Dhaka",
-  "Dili",
-  "Djibouti",
-  "Dodoma",
-  "Doha",
-  "Dublin",
-  "Dushanbe",
-  "Freetown",
-  "Funafuti",
-  "Gaborone",
-  "Georgetown",
-  "Guatemala city",
-  "Hanoi",
-  "Harare",
-  "Havana",
-  "Helsinki",
-  "Honiara",
-  "Islamabad",
-  "Jakarta",
-  "Jerusalem",
-  "Juba",
-  "Kabul",
-  "Kampala",
-  "Kathmandu",
-  "Khartoum",
-  "Kigali",
-  "Kingston",
-  "Kingstown",
-  "Kinshasa",
-  "Kuala lumpur",
-  "Kuwait city",
-  "Kyiv",
-  "La paz",
-  "Libreville",
-  "Lilongwe",
-  "Lima",
-  "Lisbon",
-  "Ljubljana",
-  "Lome",
-  "London",
-  "Luanda",
-  "Lusaka",
-  "Luxembourg",
-  "Madrid",
-  "Majuro",
-  "Malabo",
-  "Male",
-  "Managua",
-  "Manama",
-  "Manila",
-  "Maputo",
-  "Maseru",
-  "Mbabane",
-  "Melekeok",
-  "Mexico city",
-  "Minsk",
-  "Mogadishu",
-  "Monaco",
-  "Monrovia",
-  "Montevideo",
-  "Moroni",
-  "Moscow",
-  "Muscat",
-  "Nairobi",
-  "Nassau",
-  "Naypyidaw",
-  "Ndjamena",
-  "New delhi",
-  "Nicosia",
-  "Niamey",
-  "Nuku'alofa",
-  "Nouakchott",
-  "Oslo",
-  "Ottawa",
-  "Ouagadougou",
-  "Palikir",
-  "Panama city",
-  "Paramaribo",
-  "Paris",
-  "Phnom penh",
-  "Podgorica",
-  "Port louis",
-  "Port moresby",
-  "Port of spain",
-  "Port vila",
-  "Port-au-prince",
-  "Porto-novo",
-  "Praia",
-  "Pretoria",
-  "Pristina",
-  "Pyongyang",
-  "Quito",
-  "Rabat",
-  "Reykjavik",
-  "Riga",
-  "Riyadh",
-  "Rome",
-  "Roseau",
-  "Saint george's",
-  "Saint john's",
-  "San jose",
-  "San marino",
-  "San salvador",
-  "Sanaa",
-  "Santiago",
-  "Santo domingo",
-  "Sao tome",
-  "Sarajevo",
-  "Seoul",
-  "Singapore",
-  "Skopje",
-  "Sofia",
-  "Sri jayawardenepura kotte",
-  "Stockholm",
-  "Suva",
-  "Taipei",
-  "Tallinn",
-  "Tarawa",
-  "Tashkent",
-  "Tbilisi",
-  "Tegucigalpa",
-  "Tehran",
-  "Thimphu",
-  "Tirana",
-  "Tokyo",
-  "Tripoli",
-  "Tunis",
-  "Ulan bator",
-  "Vaduz",
-  "Valletta",
-  "Vatican city",
-  "Victoria",
-  "Vienna",
-  "Vientiane",
-  "Vilnius",
-  "Warsaw",
-  "Washington",
-  "Wellington",
-  "Windhoek",
-  "Yaounde",
-  "Yaren",
-  "Yerevan",
-  "Zagreb",
-];
+import capitals from "./Capitals";
 import { Typography } from "@mui/material";
 import "./App.css";
 import "./Style.css";
@@ -206,6 +11,9 @@ import "dayjs/locale/en";
 import { useTranslation } from "react-i18next";
 
 function App() {
+  {
+    /*STATES*/
+  }
   const { t, i18n } = useTranslation();
   const [Language, setLanguage] = useState(() => {
     return localStorage.getItem("Language") || "en";
@@ -222,12 +30,18 @@ function App() {
     maxTemp: null,
     humidity: null,
   });
+  {
+    /*STATES*/
+  }
 
   // تحويل الارقام لانجليزي ↔ عربي
   const toArabicNumbers = (num) => {
     if (num === null || num === undefined) return "";
     return num.toString().replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
   };
+
+
+
 
   useEffect(() => {
     if (Language === "ar") {
@@ -260,9 +74,18 @@ function App() {
       .catch(function (error) {
         console.log(error);
       });
+
+
+
+      
     localStorage.setItem("city", city);
     localStorage.setItem("Language", Language);
   }, [Language, city]);
+
+
+
+
+
 
   function changeLanguage() {
     if (Language === "en") {
@@ -273,6 +96,11 @@ function App() {
       i18n.changeLanguage("en");
     }
   }
+
+
+
+
+
 
   return (
     <>
