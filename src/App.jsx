@@ -207,10 +207,14 @@ import { useTranslation } from "react-i18next";
 
 function App() {
   const { t, i18n } = useTranslation();
-  const [Language, setLanguage] = useState("en");
+  const [Language, setLanguage] = useState(() => {
+    return localStorage.getItem("Language") || "en";
+  });
   const [date, setDate] = useState("");
-  const [city, setCity] = useState("Cairo"); // المدينة المختارة
-  const [dropdownOpen, setDropdownOpen] = useState(false); // فتح/قفل القائمة
+  const [city, setCity] = useState(() => {
+    return localStorage.getItem("city") || "Cairo";
+  });
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [temp, setTemp] = useState({
     tempruture: null,
     feelsLike: null,
@@ -221,6 +225,7 @@ function App() {
 
   // تحويل الارقام لانجليزي ↔ عربي
   const toArabicNumbers = (num) => {
+    if (num === null || num === undefined) return "";
     return num.toString().replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
   };
 
@@ -231,9 +236,11 @@ function App() {
       setDate(dayjs().locale("en").format("D MMMM YYYY"));
     }
 
+    const today = dayjs().format("YYYY-MM-DD");
+
     axios
       .get(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/2025-08-27?unitGroup=metric&elements=tempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity&key=FNTBC938EMGQAZC3Y3TZH26RU&contentType=json`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${today}?unitGroup=metric&elements=tempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity&key=FNTBC938EMGQAZC3Y3TZH26RU&contentType=json`
       )
       .then(function (response) {
         const responseTemp = response.data.currentConditions.temp;
@@ -253,6 +260,8 @@ function App() {
       .catch(function (error) {
         console.log(error);
       });
+    localStorage.setItem("city", city);
+    localStorage.setItem("Language", Language);
   }, [Language, city]);
 
   function changeLanguage() {
